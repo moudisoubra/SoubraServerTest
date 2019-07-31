@@ -1,0 +1,9 @@
+{
+  "name": "soubra-server",
+  "version": "0.0.0",
+  "description": "SoubraServer",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  }
+}
