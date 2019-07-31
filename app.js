@@ -19,7 +19,3 @@ server.get("/AddleaderBoard/:playerID/:score", function (req, res, next) {
 server.listen(3000, function () {
 
 });
-setInterval(1000, function () {
-
-
-});
