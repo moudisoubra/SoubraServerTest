@@ -24,7 +24,7 @@ server.get("/Print", function (req, res, next) {
 });
 
 server.get("/DeleteArray", function (req, res, next) {
-    Arrays.fill(playerProfile, null);
+    playerProfile.length = 0;
     res.send({ playerProfile });
     next();
 });
