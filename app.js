@@ -3,19 +3,26 @@ var restify = require("restify");
 var io = require("fs");
 console.log('Hello world');
 var server = restify.createServer();
-var leaderBoard = [];
+var playerProfile = [];
 server.get("/leaderBoard", function (req, res, next) {
-    res.send(JSON.stringify({ "leaderBoard":leaderBoard }));
+    res.send(JSON.stringify({playerProfile}));
     next();
 });
-server.get("/AddleaderBoard/:playerID/:score", function (req, res, next) {
+server.get("/AddPlayerProfile/:playerID/:score/:aesthetic", function (req, res, next) {
     var obj = {};
     obj.id = req.params.playerID;
     obj.score = req.params.score;
-    leaderBoard.push(obj);
-    res.send({ "leaderBoard": leaderBoard });
+    obj.aesthetic = req.params.aesthetic;
+    playerProfile.push(obj);
+    res.send({playerProfile});
     next();
 });
+
+server.get("/Print", function (req, res, next) {
+    res.send({playerProfile});
+    next();
+});
+
 server.listen(3000, function () {
 
 });
