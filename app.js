@@ -22,9 +22,12 @@ server.get("/Print", function (req, res, next) {
     res.send({playerProfile});
     next();
 });
+server.get("/", function (req, res, next) {
+    res.send("Please use thing");
+    next();
+});
 
-
-server.listen(443
+server.listen(3000
 , function () {
 console.log("test22");
 
