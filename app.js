@@ -5,10 +5,12 @@ console.log('Hello world');
 var server = restify.createServer();
 var playerProfile = [];
 server.get("/leaderBoard", function (req, res, next) {
+    console.log("test");
     res.send(JSON.stringify({playerProfile}));
     next();
 });
 server.get("/AddPlayerProfile/:playerID/:score/:aesthetic", function (req, res, next) {
+    console.log("test");
     var obj = {};
     obj.id = req.params.playerID;
     obj.score = req.params.score;
@@ -19,10 +21,12 @@ server.get("/AddPlayerProfile/:playerID/:score/:aesthetic", function (req, res, 
 });
 
 server.get("/Print", function (req, res, next) {
+    console.log("test");
     res.send({playerProfile});
     next();
 });
 server.get("/", function (req, res, next) {
+    console.log("test");
     res.send("Please use thing");
     next();
 });
