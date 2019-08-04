@@ -23,9 +23,6 @@ server.get("/Print", function (req, res, next) {
     next();
 });
 
-server.listen(80, function () {
-console.log("test");
-});
 
 server.listen(443
 , function () {
