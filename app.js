@@ -23,6 +23,12 @@ server.get("/Print", function (req, res, next) {
     next();
 });
 
+server.get("/DeleteArray", function (req, res, next) {
+    Arrays.fill(playerProfile, null);
+    res.send({ playerProfile });
+    next();
+});
+
 server.listen(3000, function () {
 
 });
