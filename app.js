@@ -23,6 +23,12 @@ server.get("/Print", function (req, res, next) {
     next();
 });
 
-server.listen(3000, function () {
+server.listen(80, function () {
+console.log("test");
+});
+
+server.listen(443
+, function () {
+console.log("test22");
 
 });
