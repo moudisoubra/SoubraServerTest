@@ -27,8 +27,8 @@ server.get("/", function (req, res, next) {
     next();
 });
 
-server.listen(3000
+server.listen(process.env.PORT || 3000
 , function () {
-console.log("test22");
+console.log("listning on:"+process.env.PORT);
 
 });
