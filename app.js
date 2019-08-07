@@ -38,16 +38,22 @@ server.get("/DeleteArray", function (req, res, next) {
 server.get("/ReadFile", function (req, res, next) {
 
     fs.readFile("temp.txt", function (err, buf) {
-        res.send(buf.toString());
+
+        var string = buf.toString();
+
+        res.send(JSON.parse(string));
+        
     });
 });
 
 function SavingToFile()
 {
-    var data = playerProfile;
+    var data = JSON.stringify(playerProfile);
 
     fs.writeFile("temp.txt", data, (err) => {
+
         if (err) console.log(err);
+
         console.log("Successfully Written to File.");
     });
 
@@ -57,5 +63,7 @@ setInterval(SavingToFile, 3000);
     
 
 server.listen(process.env.PORT || 3000, function () {
-    console.log(process.env.PORT);
+
+    //console.log(process.env.PORT);
+
 });
