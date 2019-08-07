@@ -38,7 +38,7 @@ server.get("/DeleteArray", function (req, res, next) {
 server.get("/ReadFile", function (req, res, next) {
 
     fs.readFile("temp.txt", function (err, buf) {
-        res.send(buf);
+        res.send(buf.toString());
     });
 });
 
