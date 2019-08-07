@@ -44,12 +44,11 @@ server.get("/ReadFile", function (req, res, next) {
 
 function SavingToFile()
 {
-    var data = "Save this";
+    var data = playerProfile;
 
     fs.writeFile("temp.txt", data, (err) => {
         if (err) console.log(err);
         console.log("Successfully Written to File.");
-
     });
 
 }
