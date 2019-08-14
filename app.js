@@ -5,14 +5,16 @@ console.log('Hello Soubra, Server activated');
 var server = restify.createServer();
 var playerProfile = [];
 
-server.get("/AddPlayerProfile/:playerID/:score/:aesthetic/:color", function (req, res, next) {
+server.get("/AddPlayerProfile/:playerID/:score/:aesthetic/:r/:g/:b", function (req, res, next) {
 
     console.log('Add player');
     var obj = {};
     obj.id = req.params.playerID;
     obj.score = req.params.score;
     obj.aesthetic = req.params.aesthetic;
-    obj.color = req.params.color; 
+    obj.r = req.params.r; 
+    obj.g = req.params.g; 
+    obj.b = req.params.b; 
     playerProfile.push(obj);
     res.send({playerProfile});
     next();
