@@ -16,6 +16,14 @@ mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
 
 var playerProfile = [];
 
+var userSchema = new mongoose.Schema({
+    name: {
+        first: String,
+        last: { type: String, trim: true }
+    },
+    age: { type: Number, min: 0 }
+});
+
 mongoose.connect(uristring, function (err, res) {
     if (err) {
         console.log('ERROR connecting to: ' + uristring + '. ' + err);
@@ -23,6 +31,14 @@ mongoose.connect(uristring, function (err, res) {
         console.log('Succeeded connected to: ' + uristring);
     }
 });
+
+server.get("/SaveMongoose", function (req, res, next) {
+
+    userSchema.save(function (err) { if (err) console.log('Error on save!') });
+    console.log("Saved Mongoose" + userSchema);
+
+});
+
 
 server.get("/AddPlayerProfile/:playerID/:score/:aesthetic/:r/:g/:b", function (req, res, next) {
 
