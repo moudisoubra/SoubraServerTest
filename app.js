@@ -8,6 +8,14 @@ console.log('Hello Soubra, Server activated');
 var mongoose = require('mongoose');
 
 var playerProfile = [];
+var theport = process.env.PORT || 5000;
+mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    Console.log("Connected to Mongoose!!!!! Mabroooook");
+});
 
 var userSchema = new mongoose.Schema({
     name: {
@@ -15,15 +23,6 @@ var userSchema = new mongoose.Schema({
         last: { type: String, trim: true }
     },
     age: { type: Number, min: 0 }
-});
-
-mongoose.connect(process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL, { useNewUrlParser: true });
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-    Console.log("Connected to Mongoose!!!!! Mabroooook");
 });
 
 server.get("/SaveMongoose", function (req, res, next) {
