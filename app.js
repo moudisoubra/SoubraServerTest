@@ -28,6 +28,23 @@ var playerProfileMongo = new mongoose.Schema({
 
 var Player = mongoose.model('Player', playerProfileMongo);
 
+server.get("FindPlayer/:playerID", function (req, res, next) {
+
+    var playerID = req.params.playerID;
+
+    Player.findOne({ "player_ID": playerID }, (err, player) => {
+        if (!player)
+        {
+            console.log("Didnt find a player with that ID");
+        }
+        else
+        {
+            console.log("Found player: " + player);
+            res.send(player.stringify());
+        }
+    });
+});
+
 server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, res, next) {
 
     var playerID = req.params.playerID;
