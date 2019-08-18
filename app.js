@@ -8,8 +8,12 @@ console.log('Hello Soubra, Server activated');
 var mongoose = require('mongoose');
 
 var playerProfile = [];
-var theport = process.env.PORT || 5000;
-mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
+var uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/MeltDown';
+
+mongoose.connect(uristring, { useNewUrlParser: true });
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
