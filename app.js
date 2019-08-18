@@ -45,6 +45,9 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, r
                 "player_Score": playerScore
             });
 
+            console.log("Created: " + pl);
+            res.send({ pl });
+
             pl.save(function (err) { if (err) console.log('Error on save!') });
         }
         else
@@ -52,6 +55,7 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, r
             console.log("Found player: " + player);
             player.player_Score = playerScore;
             player.save(function (err) { if (err) console.log('Error on save!') });
+            res.send({ player });
         }
 
     });
