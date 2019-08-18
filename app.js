@@ -57,6 +57,7 @@ server.get("/SaveFile", function (req, res, next) {
 
         if (err) console.log(err);
 
+        res.send("Successfully Written to File Manually.");
         console.log("Successfully Written to File Manually.");
     });
 });
