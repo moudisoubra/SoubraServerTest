@@ -33,17 +33,16 @@ server.get("/FindPlayer/:playerID", function (req, res, next) {
     var playerID = req.params.playerID;
 
     Player.findOne({ "player_ID": playerID }, (err, player) => {
-        if (!player)
-        {
+
+        if (!player) {
             console.log("Didnt find a player with that ID");
         }
-        else
-        {
+        else {
             console.log("Found player: " + player);
 
             var string = player.toString();
 
-            res.send(JSON.parse(string));
+            res.send(string);
         }
     });
 });
@@ -55,6 +54,7 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, r
     var playerScore = req.params.playerScore;
 
     Player.findOne({ "player_ID": playerID }, (err, player) => {
+
         if (!player) {
 
             console.log("Didnt find");
