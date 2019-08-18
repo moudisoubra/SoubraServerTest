@@ -29,9 +29,9 @@ var playerProfileMongo = new mongoose.Schema({
 
 
 playerProfileMongo.methods.Identify = function () {
-    var greeting = this.player_ID
-        ? "My ID is " + this.player_ID
-        : "I don't have a name";
+    var greeting = this.playerID
+        ? "My ID is " + this.playerID
+        : "I don't have an ID";
     console.log(greeting);
 }
 
