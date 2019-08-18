@@ -38,11 +38,14 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, r
         if (!player) {
 
             console.log("Didnt find");
+
             var pl = new Player({
                 "player_ID": playerID,
                 "player_Hat_ID": playerHatID,
                 "player_Score": playerScore
             });
+
+            pl.save(function (err) { if (err) console.log('Error on save!') });
         }
         else
         {
@@ -53,7 +56,6 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, r
 
     });
 
-    pl.save(function (err) { if (err) console.log('Error on save!') });
 
 });
 
