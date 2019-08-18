@@ -28,7 +28,7 @@ var playerProfileMongo = new mongoose.Schema({
 
 var Player = mongoose.model('Player', playerProfileMongo);
 
-server.get("FindPlayer/:playerID", function (req, res, next) {
+server.get("/FindPlayer/:playerID", function (req, res, next) {
 
     var playerID = req.params.playerID;
 
