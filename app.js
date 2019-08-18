@@ -1,11 +1,11 @@
 'use strict';
 var restify = require("restify");
 var fs = require("fs");
-var http = require('http');  
+//var http = require("http");
 var server = restify.createServer();
-console.log('Hello Soubra, Server activated');
-
 var mongoose = require('mongoose');
+
+console.log('Hello Soubra, Server activated');
 
 var playerProfile = [];
 var uristring =
@@ -26,6 +26,7 @@ var playerProfileMongo = new mongoose.Schema({
     player_Hat_ID: Number,
     player_Score: Number
 });
+
 var Player = mongoose.model('Player', playerProfileMongo);
 
 server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, res, next) {
@@ -53,8 +54,37 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, r
         else
         {
             console.log("Found player: " + player);
-            player.player_Score = playerScore;
-            player.save(function (err) { if (err) console.log('Error on save!') });
+            res.send({ player });
+        }
+
+    });
+
+
+});
+
+server.get("/ChangePlayerScore/:playerID/:playerScore", function (req, res, next)
+{
+    var playerID = req.params.playerID;
+    var playerScore = req.params.playerScore;
+
+    Player.findOne({ "player_ID": playerID }, (err, player) => {
+        if (!player) {
+
+            console.log("Didnt find");
+
+            var pl = new Player({
+                "player_ID": playerID,
+                "player_Hat_ID": playerHatID,
+                "player_Score": playerScore
+            });
+
+            console.log("Created: " + pl);
+            res.send({ pl });
+
+            pl.save(function (err) { if (err) console.log('Error on save!') });
+        }
+        else {
+            console.log("Found player: " + player);
             res.send({ player });
         }
 
@@ -144,8 +174,6 @@ function SavingToFile()
     });
 
 }
-
-//setInterval(SavingToFile, 3000);
     
 
 server.listen(process.env.PORT || 3000, function () { /// Heroku Port process.env.PORT
