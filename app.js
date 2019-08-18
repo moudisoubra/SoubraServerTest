@@ -21,14 +21,14 @@ db.once('open', function () {
     console.log("Connected to Mongoose!!!!! Mabroooook");
 });
 
-var playerProfile = new mongoose.Schema({
+var playerProfileMongo = new mongoose.Schema({
     player_ID: Number,
     player_Hat_ID: Number,
     player_Score: Number
 });
 
 
-playerProfile.methods.Identify = function () {
+playerProfileMongo.methods.Identify = function () {
     var greeting = this.player_ID
         ? "My ID is " + this.player_ID
         : "I don't have a name";
@@ -37,7 +37,7 @@ playerProfile.methods.Identify = function () {
 
 server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, res, next) {
 
-    var Player = mongoose.model('Player', playerProfile);
+    var Player = mongoose.model('Player', playerProfileMongo);
 
     var playerID = req.params.playerID;
     var playerHatID = req.params.playerHatID;
@@ -67,7 +67,7 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, r
 
 server.get("/FindPlayer/:Player_ID", function (req, res, next) {
 
-    playerProfile.find({
+    playerProfileMongo.find({
         player_ID: req.params.playerID
     },
         callback
