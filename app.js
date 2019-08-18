@@ -39,10 +39,14 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, r
 
     var Player = mongoose.model('Player', playerProfile);
 
+    var playerID = req.params.playerID;
+    var playerHatID = req.params.playerHatID;
+    var playerScore = req.params.playerScore;
+
     var tempSchema = new Player({
-        player_ID: req.params.playerID,
-        player_Hat_ID: req.params.playerHatID,
-        player_Score = req.params.playerScore
+        player_ID: playerID,
+        player_Hat_ID: playerHatID,
+        player_Score = playerScore
     });
 
     //tempSchema.player_ID = req.params.playerID;
