@@ -26,54 +26,46 @@ var playerProfileMongo = new mongoose.Schema({
     player_Hat_ID: Number,
     player_Score: Number
 });
-
-
-playerProfileMongo.methods.Identify = function () {
-    var greeting = this.playerID
-        ? "My ID is " + this.playerID
-        : "I don't have an ID";
-    console.log(greeting);
-}
+var Player = mongoose.model('Player', playerProfileMongo);
 
 server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, res, next) {
-
-    var Player = mongoose.model('Player', playerProfileMongo);
 
     var playerID = req.params.playerID;
     var playerHatID = req.params.playerHatID;
     var playerScore = req.params.playerScore;
 
-    var tempSchema = new Player({
-        player_ID: playerID,
-        player_Hat_ID: playerHatID,
-        player_Score : playerScore
+    Player.findOne({ "player_ID": playerID }, (err, player) => {
+        if (!player) {
+
+            console.log("Didnt find");
+            var pl = new Player({
+                "player_ID": playerID,
+                "player_Hat_ID": playerHatID,
+                "player_Score": playerScore
+            });
+        }
+        else
+        {
+            console.log("Found player: " + player);
+            player.player_Score = playerScore;
+            player.player_Score.save(function (err) { if (err) console.log('Error on save!') });
+        }
+
     });
 
-    //tempSchema.player_ID = req.params.playerID;
-    //tempSchema.player_Hat_ID = req.params.playerHatID;
-    //tempSchema.player_Score = req.params.playerScore;
-
-    //var tempSchema = new playerProfile({
-    //    player_ID: req.params.playerID,
-    //    player_Hat_ID: req.params.playerHatID,
-    //    player_Score = req.params.playerScore
-    //});
-
-    tempSchema.save(function (err) { if (err) console.log('Error on save!') });
-
-    console.log("Saved Mongoose" + tempSchema.Identify);
+    pl.save(function (err) { if (err) console.log('Error on save!') });
 
 });
 
-server.get("/FindPlayer/:Player_ID", function (req, res, next) {
+//server.get("/FindPlayer/:Player_ID", function (req, res, next) {
 
-    playerProfileMongo.find({
-        player_ID: req.params.playerID
-    },
-        callback
-    );
+//    playerProfileMongo.find({
+//        "player_ID": req.params.playerID
+//    },
+//        console.log(
+//    );
 
-});
+//});
 
 server.get("/AddPlayerProfile/:playerID/:score/:aesthetic/:r/:g/:b", function (req, res, next) {
 
