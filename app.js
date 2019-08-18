@@ -81,6 +81,24 @@ server.get("/ChangePlayerScore/:playerID/:playerScore", function (req, res, next
 
 });
 
+server.get("/ChangePlayerHat/:playerID/:playerHatID", function (req, res, next) {
+
+    var playerID = req.params.playerID;
+    var playerHatID = req.params.playerHatID;
+
+    Player.findOne({ "player_ID": playerID }, (err, player) => {
+        if (!player) {
+            console.log("Didnt find a player with that ID");
+        }
+        else {
+            console.log("Found player: " + player);
+            player.player_Hat_ID = playerHatID;
+            player.save(function (err) { if (err) console.log('Error on save!') });
+            res.send({ player });
+        }
+    });
+
+});
 //server.get("/FindPlayer/:Player_ID", function (req, res, next) {
 
 //    playerProfileMongo.find({
