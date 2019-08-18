@@ -18,7 +18,7 @@ mongoose.connect(uristring, { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-    Console.log("Connected to Mongoose!!!!! Mabroooook");
+    console.log("Connected to Mongoose!!!!! Mabroooook");
 });
 
 var userSchema = new mongoose.Schema({
@@ -28,6 +28,7 @@ var userSchema = new mongoose.Schema({
     },
     age: { type: Number, min: 0 }
 });
+player = new userSchema();
 
 server.get("/SaveMongoose", function (req, res, next) {
 
@@ -40,6 +41,7 @@ server.get("/SaveMongoose", function (req, res, next) {
 server.get("/AddPlayerProfile/:playerID/:score/:aesthetic/:r/:g/:b", function (req, res, next) {
 
     console.log('Add player');
+
     var obj = {};
     obj.id = req.params.playerID;
     obj.score = req.params.score;
