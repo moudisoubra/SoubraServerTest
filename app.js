@@ -12,7 +12,6 @@ var uristring =
     process.env.MONGOHQ_URL ||
     'mongodb://localhost/HelloMongoose';
 
-mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
 
 var playerProfile = [];
 
