@@ -28,7 +28,7 @@ var userSchema = new mongoose.Schema({
     },
     age: { type: Number, min: 0 }
 });
-player = new userSchema();
+
 
 server.get("/SaveMongoose", function (req, res, next) {
 
