@@ -17,7 +17,8 @@ var userSchema = new mongoose.Schema({
     age: { type: Number, min: 0 }
 });
 
-mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL, { useNewUrlParser: true });
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
