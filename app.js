@@ -49,6 +49,19 @@ server.get("/ReadFile", function (req, res, next) {
     });
 });
 
+server.get("/SaveFile", function (req, res, next) {
+
+    var data = JSON.stringify(playerProfile);
+
+    fs.writeFile("temp.txt", data, (err) => {
+
+        if (err) console.log(err);
+
+        console.log("Successfully Written to File Manually.");
+    });
+});
+
+
 function SavingToFile()
 {
     var data = JSON.stringify(playerProfile);
@@ -65,7 +78,7 @@ function SavingToFile()
 setInterval(SavingToFile, 3000);
     
 
-server.listen(process.env.PORT || 3000, function () {
+server.listen(process.env.PORT || 3000, function () { /// Heroku Port process.env.PORT
 
     //console.log(process.env.PORT);
 
