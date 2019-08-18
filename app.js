@@ -1,9 +1,8 @@
 'use strict';
 var restify = require("restify");
 var fs = require("fs");
-//var http = require("http");
-var server = restify.createServer();
 var mongoose = require('mongoose');
+var server = restify.createServer();
 
 console.log('Hello Soubra, Server activated');
 
@@ -68,28 +67,17 @@ server.get("/ChangePlayerScore/:playerID/:playerScore", function (req, res, next
     var playerScore = req.params.playerScore;
 
     Player.findOne({ "player_ID": playerID }, (err, player) => {
-        if (!player) {
-
-            console.log("Didnt find");
-
-            var pl = new Player({
-                "player_ID": playerID,
-                "player_Hat_ID": playerHatID,
-                "player_Score": playerScore
-            });
-
-            console.log("Created: " + pl);
-            res.send({ pl });
-
-            pl.save(function (err) { if (err) console.log('Error on save!') });
+        if (!player)
+        {
+            console.log("Didnt find a player with that ID");
         }
         else {
             console.log("Found player: " + player);
+            player.player_Score = playerScore;
+            player.save(function (err) { if (err) console.log('Error on save!') });
             res.send({ player });
         }
-
     });
-
 
 });
 
