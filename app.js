@@ -7,12 +7,6 @@ console.log('Hello Soubra, Server activated');
 
 var mongoose = require('mongoose');
 
-var uristring =
-    process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/HelloMongoose';
-
-
 var playerProfile = [];
 
 var userSchema = new mongoose.Schema({
@@ -23,12 +17,12 @@ var userSchema = new mongoose.Schema({
     age: { type: Number, min: 0 }
 });
 
-mongoose.connect(uristring, function (err, res) {
-    if (err) {
-        console.log('ERROR connecting to: ' + uristring + '. ' + err);
-    } else {
-        console.log('Succeeded connected to: ' + uristring);
-    }
+mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    Console.log("Connected to Mongoose!!!!! Mabroooook");
 });
 
 server.get("/SaveMongoose", function (req, res, next) {
