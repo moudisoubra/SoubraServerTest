@@ -1,9 +1,28 @@
 'use strict';
 var restify = require("restify");
 var fs = require("fs");
-console.log('Hello Soubra, Server activated');
+var http = require('http');  
 var server = restify.createServer();
+console.log('Hello Soubra, Server activated');
+
+var mongoose = require('mongoose');
+
+var uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/HelloMongoose';
+
+mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
+
 var playerProfile = [];
+
+mongoose.connect(uristring, function (err, res) {
+    if (err) {
+        console.log('ERROR connecting to: ' + uristring + '. ' + err);
+    } else {
+        console.log('Succeeded connected to: ' + uristring);
+    }
+});
 
 server.get("/AddPlayerProfile/:playerID/:score/:aesthetic/:r/:g/:b", function (req, res, next) {
 

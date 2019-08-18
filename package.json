@@ -4,12 +4,13 @@
   "description": "SoubraServer",
   "main": "app.js",
   "author": {
-    "name": ""
+    "name": "Soubra"
   },
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
+    "mongoose": "^5.6.9",
     "restify": "8.3.3"
   }
 }
