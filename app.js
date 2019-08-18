@@ -40,7 +40,10 @@ server.get("/FindPlayer/:playerID", function (req, res, next) {
         else
         {
             console.log("Found player: " + player);
-            res.send(player.stringify());
+
+            var string = player.toString();
+
+            res.send(JSON.parse(string));
         }
     });
 });
