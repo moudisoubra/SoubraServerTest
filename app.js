@@ -46,7 +46,7 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, r
     var tempSchema = new Player({
         player_ID: playerID,
         player_Hat_ID: playerHatID,
-        player_Score = playerScore
+        player_Score : playerScore
     });
 
     //tempSchema.player_ID = req.params.playerID;
