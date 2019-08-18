@@ -21,22 +21,55 @@ db.once('open', function () {
     console.log("Connected to Mongoose!!!!! Mabroooook");
 });
 
-var userSchema = new mongoose.Schema({
-    name: {
-        first: String,
-        last: { type: String, trim: true }
+var playerProfile = new mongoose.Schema({
+    player_ID: Number,
+    player_Hat_ID: Number,
+    player_Score: Number
+});
+
+
+playerProfile.methods.Identify = function () {
+    var greeting = this.player_ID
+        ? "My ID is " + this.player_ID
+        : "I don't have a name";
+    console.log(greeting);
+}
+
+server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, res, next) {
+
+    var Player = mongoose.model('Player', playerProfile);
+
+    var tempSchema = new Player({
+        player_ID: req.params.playerID,
+        player_Hat_ID: req.params.playerHatID,
+        player_Score = req.params.playerScore
+    });
+
+    //tempSchema.player_ID = req.params.playerID;
+    //tempSchema.player_Hat_ID = req.params.playerHatID;
+    //tempSchema.player_Score = req.params.playerScore;
+
+    //var tempSchema = new playerProfile({
+    //    player_ID: req.params.playerID,
+    //    player_Hat_ID: req.params.playerHatID,
+    //    player_Score = req.params.playerScore
+    //});
+
+    tempSchema.save(function (err) { if (err) console.log('Error on save!') });
+
+    console.log("Saved Mongoose" + tempSchema.Identify);
+
+});
+
+server.get("/FindPlayer/:Player_ID", function (req, res, next) {
+
+    playerProfile.find({
+        player_ID: req.params.playerID
     },
-    age: { type: Number, min: 0 }
-});
-
-
-server.get("/SaveMongoose", function (req, res, next) {
-
-    userSchema.save(function (err) { if (err) console.log('Error on save!') });
-    console.log("Saved Mongoose" + userSchema);
+        callback
+    );
 
 });
-
 
 server.get("/AddPlayerProfile/:playerID/:score/:aesthetic/:r/:g/:b", function (req, res, next) {
 
@@ -110,7 +143,7 @@ function SavingToFile()
 
 }
 
-setInterval(SavingToFile, 3000);
+//setInterval(SavingToFile, 3000);
     
 
 server.listen(process.env.PORT || 3000, function () { /// Heroku Port process.env.PORT
