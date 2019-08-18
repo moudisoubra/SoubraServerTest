@@ -42,8 +42,10 @@ server.get("/FindPlayer/:playerID", function (req, res, next) {
 
             var string = player.toString();
 
-            res.send(JSON.parse(string));
+            res.send(player);
+
         }
+        next();
     });
 });
 
