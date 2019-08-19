@@ -157,19 +157,19 @@ server.get("/ChangePlayerHat/:playerID/:playerHatID", function (req, res, next) 
 
 });
 
-//server.get("/clearOneMongo/:playerID", function (req, res) { //REMOVES ONE PLAYER FROM THE DATABASE BASED ON ID SCORE
-//    //Sets the information based on the input from the user
-//    var player_ID = req.params.playerID;
-//    player.findOneAndDelete({ "player_ID": player_ID }, (err, Player) => { //Finds one user
-//        if (!Player) { //If we dont find the player within the database
-//            console.log("Player already deleted!");
-//        }
-//        else {
-//            console.log("Found player: " + Player);
-//            res.send({ Player }); //The player already exists in the database & will be sent to us.
-//        }
-//    });
-//});
+server.get("/clearOneMongo/:playerID", function (req, res) { //REMOVES ONE PLAYER FROM THE DATABASE BASED ON ID SCORE
+    //Sets the information based on the input from the user
+    var player_ID = req.params.playerID;
+    Player.findOneAndDelete({ "player_ID": player_ID }, (err, player) => { //Finds one user
+        if (!player) { //If we dont find the player within the database
+            console.log("Player already deleted!");
+        }
+        else {
+            console.log("Found player: " + player);
+            res.send({ player }); //The player already exists in the database & will be sent to us.
+        }
+    });
+});
 
 server.get("/listAllMongo", function (req, res) { //LISTS ALL PLAYERS IN THE DATABASE
     Player.find(function (err, player) {
