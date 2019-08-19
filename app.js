@@ -81,10 +81,22 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore/:r/:g/:b", functio
 
             pl.save(function (err) { if (err) console.log('Error on save!') });
         }
-        else
-        {
+        else {
+
+            player = new Player({
+
+                "player_ID": playerID,
+                "player_Hat_ID": playerHatID,
+                "player_Score": playerScore,
+                "r": r,
+                "g": g,
+                "b": b
+
+            });
+
             console.log("Found player: " + player);
             res.send({ player });
+
         }
 
     });
@@ -194,6 +206,7 @@ server.get("/SortByID", function (req, res) {
 
 server.get("/listAllMongo", function (req, res) { //LISTS ALL PLAYERS IN THE DATABASE
     Player.find(function (err, player) {
+
         if (err) return console.error(err);
 
         console.log(player);
@@ -202,11 +215,9 @@ server.get("/listAllMongo", function (req, res) { //LISTS ALL PLAYERS IN THE DAT
     });
 });
 
-server.get("/ListPlayerID", function (req, res) { //LISTS ALL PLAYERS IN THE DATABASE
+server.get("/ListDataBaseCount", function (req, res) {
 
     Player.count({}, function (err, c) {
-
-        var count = c;
 
         res.send({ c });
 
