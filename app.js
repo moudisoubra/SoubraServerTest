@@ -31,6 +31,14 @@ var playerProfileMongo = new mongoose.Schema({
 
 var Player = mongoose.model('Player', playerProfileMongo);
 
+server.get("/Goodnight", function (req, res, next) 
+{
+
+    var goodnight = "goodnight";
+    res.send(goodnight.toString());
+
+});
+
 server.get("/FindPlayer/:playerID", function (req, res, next) {
 
     var playerID = req.params.playerID;
@@ -226,6 +234,8 @@ server.get("/ListDataBaseCount", function (req, res) {
 
 });
 
+//--------------------------------------------------------------SAVING TO FILE--------------------------------------------------------------------------//
+
 server.get("/AddPlayerProfile/:playerID/:score/:aesthetic/:r/:g/:b", function (req, res, next) {
 
     console.log('Add player');
@@ -298,6 +308,7 @@ function SavingToFile()
 
 }
     
+//--------------------------------------------------------------SAVING TO FILE--------------------------------------------------------------------------//
 
 server.listen(process.env.PORT || 3000, function () { /// Heroku Port process.env.PORT
 
