@@ -202,6 +202,19 @@ server.get("/listAllMongo", function (req, res) { //LISTS ALL PLAYERS IN THE DAT
     });
 });
 
+server.get("/ListPlayerID", function (req, res) { //LISTS ALL PLAYERS IN THE DATABASE
+
+    Player.count({ name: 'anand' }, function (err, c) {
+
+        var count = c;
+
+        res.send({ c });
+
+        console.log('Count is ' + c);
+    });
+
+});
+
 server.get("/AddPlayerProfile/:playerID/:score/:aesthetic/:r/:g/:b", function (req, res, next) {
 
     console.log('Add player');
