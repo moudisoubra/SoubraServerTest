@@ -171,6 +171,14 @@ server.get("/clearOneMongo/:playerID", function (req, res) { //REMOVES ONE PLAYE
     });
 });
 
+server.get("/ClearAll", function (req, res) { 
+
+    Player.remove({}, function (err) {
+        console.log('DataBase Wiped')
+    });
+
+});
+
 server.get("/listAllMongo", function (req, res) { //LISTS ALL PLAYERS IN THE DATABASE
     Player.find(function (err, player) {
         if (err) return console.error(err);
