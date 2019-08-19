@@ -23,7 +23,10 @@ db.once('open', function () {
 var playerProfileMongo = new mongoose.Schema({
     player_ID: Number,
     player_Hat_ID: Number,
-    player_Score: Number
+    player_Score: Number,
+    r: Number,
+    g: Number,
+    b: Number
 });
 
 var Player = mongoose.model('Player', playerProfileMongo);
@@ -49,11 +52,14 @@ server.get("/FindPlayer/:playerID", function (req, res, next) {
     });
 });
 
-server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, res, next) {
+server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore/:r/:g/:b", function (req, res, next) {
 
     var playerID = req.params.playerID;
     var playerHatID = req.params.playerHatID;
     var playerScore = req.params.playerScore;
+    var r = req.params.r;
+    var g = req.params.g;
+    var b = req.params.b;
 
     Player.findOne({ "player_ID": playerID }, (err, player) => {
 
@@ -64,7 +70,10 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, r
             var pl = new Player({
                 "player_ID": playerID,
                 "player_Hat_ID": playerHatID,
-                "player_Score": playerScore
+                "player_Score": playerScore,
+                "r": r,
+                "g": g,
+                "b": b
             });
 
             console.log("Created: " + pl);
@@ -81,6 +90,32 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore", function (req, r
     });
 
 
+});
+
+server.get("/ChangeColor/:playerID/:r/:g/:b", function (req, res, next)
+{
+    var playerID = req.params.playerID;
+    var r = req.params.r;
+    var g = req.params.g;
+    var b = req.params.b;
+
+    Player.findOne({ "player_ID": playerID }, (err, player) => {
+
+        if (!player) {
+            console.log("Didnt find a player with that ID");
+        }
+        else {
+            console.log("Found player: " + player);
+
+            player.r = r;
+            player.g = g;
+            player.b = b;
+
+            player.save(function (err) { if (err) console.log('Error on save!') });
+
+            res.send({ player });
+        }
+    });
 });
 
 server.get("/ChangePlayerScore/:playerID/:playerScore", function (req, res, next)
@@ -121,14 +156,27 @@ server.get("/ChangePlayerHat/:playerID/:playerHatID", function (req, res, next) 
     });
 
 });
-//server.get("/FindPlayer/:Player_ID", function (req, res, next) {
 
-//    playerProfileMongo.find({
-//        "player_ID": req.params.playerID
-//    },
-//        console.log(
-//    );
+//server.get("/clearOneMongo/:playerID", function (req, res) { //REMOVES ONE PLAYER FROM THE DATABASE BASED ON ID SCORE
+//    //Sets the information based on the input from the user
+//    var player_ID = req.params.playerID;
+//    player.findOneAndDelete({ "player_ID": player_ID }, (err, Player) => { //Finds one user
+//        if (!Player) { //If we dont find the player within the database
+//            console.log("Player already deleted!");
+//        }
+//        else {
+//            console.log("Found player: " + Player);
+//            res.send({ Player }); //The player already exists in the database & will be sent to us.
+//        }
+//    });
+//});
 
+//server.get("/listAllMongo", function (req, res) { //LISTS ALL PLAYERS IN THE DATABASE
+//    player.find(function (err, Player) {
+//        if (err) return console.error(err);
+//        console.log(Player);
+//        res.send({ Player });
+//    });
 //});
 
 server.get("/AddPlayerProfile/:playerID/:score/:aesthetic/:r/:g/:b", function (req, res, next) {
@@ -204,8 +252,8 @@ function SavingToFile()
 }
     
 
-server.listen(process.env.PORT || 3000, function () { /// Heroku Port process.env.PORT
+    server.listen(process.env.PORT || 3000, function () { /// Heroku Port process.env.PORT
 
-    //console.log(process.env.PORT);
+        //console.log(process.env.PORT);
 
-});
+    });
