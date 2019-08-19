@@ -204,7 +204,7 @@ server.get("/listAllMongo", function (req, res) { //LISTS ALL PLAYERS IN THE DAT
 
 server.get("/ListPlayerID", function (req, res) { //LISTS ALL PLAYERS IN THE DATABASE
 
-    Player.count({ name: 'anand' }, function (err, c) {
+    Player.count({}, function (err, c) {
 
         var count = c;
 
