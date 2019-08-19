@@ -171,10 +171,23 @@ server.get("/clearOneMongo/:playerID", function (req, res) { //REMOVES ONE PLAYE
     });
 });
 
-server.get("/ClearAll", function (req, res) { 
+server.get("/ClearAll", function (req, res) { //BIG RED BUTTON
 
     Player.remove({}, function (err) {
         console.log('DataBase Wiped')
+    });
+
+});
+
+server.get("/SortByID", function (req, res) {
+
+    player.find({}).sort({ player_ID: 1 }).exec(function (err, ID)
+    {
+        var leaderboard = ID;
+
+        console.log(leaderboard);
+
+        res.send({ leaderboard });
     });
 
 });
