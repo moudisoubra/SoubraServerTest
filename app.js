@@ -171,13 +171,15 @@ server.get("/ChangePlayerHat/:playerID/:playerHatID", function (req, res, next) 
 //    });
 //});
 
-//server.get("/listAllMongo", function (req, res) { //LISTS ALL PLAYERS IN THE DATABASE
-//    player.find(function (err, Player) {
-//        if (err) return console.error(err);
-//        console.log(Player);
-//        res.send({ Player });
-//    });
-//});
+server.get("/listAllMongo", function (req, res) { //LISTS ALL PLAYERS IN THE DATABASE
+    Player.find(function (err, player) {
+        if (err) return console.error(err);
+
+        console.log(player);
+
+        res.send({ player });
+    });
+});
 
 server.get("/AddPlayerProfile/:playerID/:score/:aesthetic/:r/:g/:b", function (req, res, next) {
 
@@ -252,8 +254,8 @@ function SavingToFile()
 }
     
 
-    server.listen(process.env.PORT || 3000, function () { /// Heroku Port process.env.PORT
+server.listen(process.env.PORT || 3000, function () { /// Heroku Port process.env.PORT
 
-        //console.log(process.env.PORT);
+    //console.log(process.env.PORT);
 
-    });
+});
