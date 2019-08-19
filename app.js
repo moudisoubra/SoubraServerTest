@@ -34,7 +34,8 @@ var Player = mongoose.model('Player', playerProfileMongo);
 server.get("/Goodnight", function (req, res, next) 
 {
 
-    var goodnight = "goodnight";
+    var goodnight = "Goodnight.";
+    
     res.send(goodnight.toString());
 
 });
