@@ -181,7 +181,7 @@ server.get("/ClearAll", function (req, res) { //BIG RED BUTTON
 
 server.get("/SortByID", function (req, res) {
 
-    player.find({}).sort({ player_ID: 1 }).exec(function (err, ID)
+    Player.find({}).sort({ player_ID: 1 }).exec(function (err, ID)
     {
         var leaderboard = ID;
 
