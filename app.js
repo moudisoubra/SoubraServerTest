@@ -22,6 +22,7 @@ db.once('open', function () {
 
 var playerProfileMongo = new mongoose.Schema({
     player_ID: Number,
+    player_Name: String,
     player_Hat_ID: Number,
     player_Score: Number,
     r: Number,
@@ -61,9 +62,10 @@ server.get("/FindPlayer/:playerID", function (req, res, next) {
     });
 });
 
-server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore/:r/:g/:b", function (req, res, next) {
+server.get("/SaveMongoose/:playerID/:playerName/:playerHatID/:playerScore/:r/:g/:b", function (req, res, next) {
 
     var playerID = req.params.playerID;
+    var playerName = req.params.playerName;
     var playerHatID = req.params.playerHatID;
     var playerScore = req.params.playerScore;
     var r = req.params.r;
@@ -78,6 +80,7 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore/:r/:g/:b", functio
 
             var pl = new Player({
                 "player_ID": playerID,
+                "player_Name": playerName,
                 "player_Hat_ID": playerHatID,
                 "player_Score": playerScore,
                 "r": r,
@@ -95,6 +98,7 @@ server.get("/SaveMongoose/:playerID/:playerHatID/:playerScore/:r/:g/:b", functio
             player = new Player({
 
                 "player_ID": playerID,
+                "player_Name": playerName,
                 "player_Hat_ID": playerHatID,
                 "player_Score": playerScore,
                 "r": r,
@@ -137,6 +141,26 @@ server.get("/ChangeColor/:playerID/:r/:g/:b", function (req, res, next)
             res.send({ player });
         }
     });
+});
+
+server.get("/ChangePlayerScore/:playerID/:playerName", function (req, res, next)
+{
+    var playerID = req.params.playerID;
+    var playerName = req.params.playerName;
+
+    Player.findOne({ "player_ID": playerID }, (err, player) => {
+        if (!player)
+        {
+            console.log("Didnt find a player with that ID");
+        }
+        else {
+            console.log("Found player: " + player);
+            player.player_Name = playerName;
+            player.save(function (err) { if (err) console.log('Error on save!') });
+            res.send({ player });
+        }
+    });
+
 });
 
 server.get("/ChangePlayerScore/:playerID/:playerScore", function (req, res, next)
