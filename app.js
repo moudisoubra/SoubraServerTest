@@ -21,7 +21,7 @@ db.once('open', function () {
 });
 
 var playerProfileMongo = new mongoose.Schema({
-    player_ID: Number,
+    player_ID: String,
     player_Name: String,
     player_Hat_ID: Number,
     player_Score: Number,
