@@ -93,7 +93,8 @@ server.get("/SaveMongoose/:playerID/:playerName/:playerHatID/:playerScore/:r/:g/
 
             pl.save(function (err) { if (err) console.log('Error on save!') });
         }
-        else {
+        else 
+        {
 
             player = new Player({
 
@@ -143,7 +144,7 @@ server.get("/ChangeColor/:playerID/:r/:g/:b", function (req, res, next)
     });
 });
 
-server.get("/ChangePlayerScore/:playerID/:playerName", function (req, res, next)
+server.get("/ChangePlayerName/:playerID/:playerName", function (req, res, next)
 {
     var playerID = req.params.playerID;
     var playerName = req.params.playerName;
