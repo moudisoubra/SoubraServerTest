@@ -221,6 +221,10 @@ server.get("/ClearAll", function (req, res) { //BIG RED BUTTON
 
     Player.remove({}, function (err) {
         console.log('DataBase Wiped')
+
+        var string = "DataBase Wiped";
+    
+        res.send(string.toString());
     });
 
 });
