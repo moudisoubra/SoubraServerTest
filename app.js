@@ -56,9 +56,7 @@ server.get("/FindPlayer/:playerID", function (req, res, next) {
             var string = player.toString();
 
             res.send(player);
-
         }
-
     });
 });
 
@@ -198,12 +196,10 @@ server.get("/leaderboard", function (req, res) {
     Player.find({}).sort({ player_Score: -1 }).limit(10).exec(function (err, scores) 
     {
         var leaderboard = scores;
-        console.log(leaderboard);
 
         res.send({ leaderboard });
-
+        next();
     });
-
 });
 
 server.get("/ChangePlayerHat/:playerID/:playerHatID", function (req, res, next) {
