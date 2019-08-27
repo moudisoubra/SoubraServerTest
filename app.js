@@ -200,9 +200,7 @@ server.get("/leaderboard", function (req, res) {
         var leaderboard = scores;
         console.log(leaderboard);
 
-        leaderboard.s
-
-        res.send( leaderboard );
+        res.send({ leaderboard });
 
     });
 
