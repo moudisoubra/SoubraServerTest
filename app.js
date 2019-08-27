@@ -195,7 +195,7 @@ server.get("/ChangePlayerScore/:playerID/:playerScore", function (req, res, next
 
 server.get("/leaderboard", function (req, res) {
 
-    Player.find({}).sort({ player_Score: 1 }).limit(10).exec(function (err, scores) 
+    Player.find({}).sort({ player_Score: -1 }).limit(10).exec(function (err, scores) 
     {
         var leaderboard = scores;
         console.log(leaderboard);
