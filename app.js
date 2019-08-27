@@ -175,10 +175,19 @@ server.get("/ChangePlayerScore/:playerID/:playerScore", function (req, res, next
             console.log("Didnt find a player with that ID");
         }
         else {
-            console.log("Found player: " + player);
-            player.player_Score = playerScore;
-            player.save(function (err) { if (err) console.log('Error on save!') });
-            res.send({ player });
+
+            if (playerScore > player.player_Score)
+            {
+                console.log("Found player: " + player);
+                player.player_Score = playerScore;
+                player.save(function (err) { if (err) console.log('Error on save!') });
+                res.send({ player });
+            }
+            else
+            {
+                var string = ("Player Score is Higher");
+                res.send({ string });
+            }
         }
     });
 
