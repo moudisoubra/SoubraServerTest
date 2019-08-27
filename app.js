@@ -198,7 +198,6 @@ server.get("/leaderboard", function (req, res) {
         var leaderboard = scores;
 
         res.send({ leaderboard });
-        next();
     });
 });
 
