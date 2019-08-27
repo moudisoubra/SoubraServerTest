@@ -193,6 +193,18 @@ server.get("/ChangePlayerScore/:playerID/:playerScore", function (req, res, next
 
 });
 
+server.get("/leaderboard", function (req, res) {
+
+    player.find({}).sort({ player_Score: 1 }).limit(10).exec(function (err, scores) 
+    {
+        var leaderboard = scores;
+        console.log(leaderboard);
+        res.send({ leaderboard });
+
+    });
+
+});
+
 server.get("/ChangePlayerHat/:playerID/:playerHatID", function (req, res, next) {
 
     var playerID = req.params.playerID;
