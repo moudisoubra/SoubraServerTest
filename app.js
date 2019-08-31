@@ -201,9 +201,10 @@ server.get("/leaderboard", function (req, res) {
     });
 });
 
-server.get("/WakeUp", function (req, res) {
+server.get("/wakeup", function (req, res) {
 
     var string = "WakeUp";
+
     res.send({ string });
 });
 
