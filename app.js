@@ -201,6 +201,12 @@ server.get("/leaderboard", function (req, res) {
     });
 });
 
+server.get("/WakeUp", function (req, res) {
+
+    var string = "WakeUp";
+    res.send({ string });
+});
+
 server.get("/ChangePlayerHat/:playerID/:playerHatID", function (req, res, next) {
 
     var playerID = req.params.playerID;
