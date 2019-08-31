@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var server = restify.createServer();
 
 console.log('Hello Soubra, Server activated');
-
+//
 var playerProfile = [];
 var uristring =
     process.env.MONGODB_URI ||
