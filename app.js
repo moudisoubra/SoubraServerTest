@@ -61,7 +61,7 @@ server.get("/FindPlayer/:playerID", function (req, res, next) {
 
             var string = player.toString();
 
-            res.send(player);
+            res.send(player);//
         }
     });
 });
